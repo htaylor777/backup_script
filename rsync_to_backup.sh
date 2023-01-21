@@ -16,14 +16,20 @@ dir=$3
 
 if [[ ! -z "$3"  && ! -d $clbackup/$dir ]]; then 
 echo "attempting to mkdir backup $fl to $clbackup/$dir"
+mkdir -p $clbackup/$dir
+rsync -az --progress --no-perms --no-group --no-owner --stats --human-readable $fl $clbackup/$dir 
+exit 0
 
 elif [[ ! -z "$3"  && -d $clbackup/$dir ]]; then
 echo "$dir exists: attempting to backup $fl to $clbackup/$dir"
+rsync -az --progress --no-perms --no-group --no-owner --stats --human-readable $fl $clbackup/$dir 
+exit 0
 
 elif [  -z "$3" ]; then
 echo "attempting to direct volume backup $fl to $clbackup"
+rsync -az --progress --no-perms --no-group --no-owner --stats --human-readable $fl $clbackup
+exit 0
 fi
-
 }
 
 
@@ -32,16 +38,21 @@ fi
 function file_bkup_init() {
 INFILE=$1
 echo "your file is: $INFILE"
-echo "What is the volume name where you would like to backup $INFILE to?"
+echo "Which Volume Name Drive would like as the destination for your backup: $INFILE?"
 echo "Choose by number:"
-echo "client1->[1] or client2->[2]"
+echo "Client1->[1] or Client2->[2] or Quit->[-1]: "
 read client
 
-echo "If there is a backup directory name in the backup $client enter it here: "
+if [ $client -eq -1 ]; then
+echo "...Quitting"
+exit 0
+fi
+
+echo "If there is a backup sub-directory name in the backup $client enter it here: "
 read dirext
 
   if [ $client == 1 ]; then
-     CLIENT="/Volumes/client_1"
+     CLIENT="/Volumes/Client_1"
      procbackup $INFILE $CLIENT $dirext
 
  elif [ $client == 2 ]; then
@@ -70,7 +81,7 @@ exit 0
 
 
 function pathfile_backup() {
-echo " What is your File to backup? "
+echo " What is your File Name to backup? "
 read thispathfile
 
 if [ -e "${CURRENT}/$thispathfile" ]; then 
@@ -85,7 +96,7 @@ fi
 
 
 function directory_backup() {
-echo " What is your Directory to backup? "
+echo " What is your Directory Name that you want to backup? "
 read thisdirectory
 
 if [ -e "${CURRENT}/$thisdirectory" ]; then 
