@@ -66,7 +66,7 @@ fi
 
 function dir_bkup_init() {
 INDIR=$1
-CLIENT="/Volumes/Backups"
+CLIENT="/Volumes/Backups-1"
 ArcDate="$(date +%F)"
 
 if [ ! -d "${CLIENT}/$ArcDate" ]; then
@@ -75,7 +75,8 @@ mkdir -p "${CLIENT}/$ArcDate"
 fi
 
 echo "Attempting to backup your directory: $INDIR to ${CLIENT}/$ArcDate"
-rsync -vrltD --progress --no-perms --no-group --no-owner --stats --human-readable ${INDIR} ${CLIENT}/$ArcDate --exclude=".*/" |  pv -lep -s 42 >/dev/null
+rsync -vrltD --progress --no-perms --no-group --no-owner --stats --human-readable ${INDIR} ${CLIENT}/$ArcDate --exclude=".*/" 
+##rsync -vrltD --progress --no-perms --no-group --no-owner --stats --human-readable ${INDIR} ${CLIENT}/$ArcDate --exclude=".*/" |  pv -lep -s 42 >/dev/null
 exit 0
 }
 
