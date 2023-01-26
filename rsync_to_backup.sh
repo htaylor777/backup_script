@@ -16,6 +16,7 @@
 #  you should be able to call it anywhere on the system using keyword "backup"
 #----------------------------------------------------------------------------
 
+#@Executes file backup:
 function proc_file_backup() {
 fl=$1
 clbackup=$2
@@ -41,7 +42,7 @@ fi
 
 
 
-
+# @Gather File and backup drive information choice to initiate the backup 
 function file_bkup_init() {
 INFILE=$1
 echo "your file is: $INFILE"
@@ -72,6 +73,7 @@ fi
 }
 
 
+#  initiate the path/directory backup 
 function dir_bkup_init() {
 INDIR=$1
 CLIENT="/Volumes/Backups-1"
@@ -89,6 +91,7 @@ exit 0
 }
 
 
+# @Gather File information, test Path/File existence then initiate the backup or fail: 
 function pathfile_backup() {
 echo " What is your File Name to backup? "
 read thispathfile
@@ -103,7 +106,7 @@ fi
 }
 
 
-
+#@Gather the Directory name information, test path/directory existence, send to initiate backup
 function directory_backup() {
 echo " What is your Directory Name that you want to backup? "
 read thisdirectory
@@ -116,7 +119,7 @@ exit 1
 fi
 }
 
-
+# @starts here:
 function init() {
 
 echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||"
@@ -144,5 +147,7 @@ init
 fi
 done
 }
+
+#@call function to initiate script:
 clear
 init

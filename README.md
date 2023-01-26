@@ -1,8 +1,10 @@
-# backup_script files and directory for MAC OS and Linux
+  
 + 01/2023 - version 1.0 - written by Hilery Taylor - https://github.com/htaylor777/backup_script
+  ***PURPOSE: 
+  backup script to backup files and directory on MAC and Linux
   OS: MAC, Linux
-  install script to /usr/local/bin or your bin PATH for global access
-# ----------------------------------------------------------------------------
+  install script to your /usr/local/bin or bin PATH for global access
+ ---------------------------------------------------------------------
   ***INSTRUCTIONS:
   Configure your file backup server location(s):
 -  Line 52: @DEFINE your external BACKUPDRIVE(S): BACKUPDRIVE=<pathToYourFileBackupDrive>[1] [2] [etc]
